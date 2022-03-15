@@ -38,4 +38,5 @@ class Client(object):
         self._socket.send(output.encode())
 
 
-
+client = Client('127.0.0.1')
+client.start()

@@ -56,3 +56,7 @@ class Server(object):
             print(result_output)
         finally:
             pass
+
+
+server = Server('127.0.0.1')
+server.start()
