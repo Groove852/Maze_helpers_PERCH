@@ -5,23 +5,14 @@ import subprocess
 class Client(object):
     _socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    def __init__(self, ip):
-        self._socket.connect((ip, 8888))
+    def __init__(self):
+        self._socket.connect((input("Enter IP:\n"), input("Enter Port: \n")))
         return
 
     def start(self):
         while 1:
-            value = self._socket.recv(1024).decode()
-            if value == "1":
-                self.command()
-            elif value == "2":
-                self.sendDiagnostic()
-            elif value == "3":
-                self.sendTopics()
-            elif value == "exit":
-                break
-            else:
-                continue
+            self._socket.send('1'.encode())
+            self.command()
         self._socket.close()
 
     def sendDiagnostic(self):
@@ -38,5 +29,5 @@ class Client(object):
         self._socket.send(output.encode())
 
 
-client = Client('127.0.0.1')
+client = Client()
 client.start()
